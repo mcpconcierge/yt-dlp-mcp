@@ -120,11 +120,53 @@ Ask your LLM to:
 "Extract just the id, title, and view count from this video: https://youtube.com/watch?v=..."
 ```
 
-## Manual Start
+## Manual Local Install - Windows
 
 If needed, start the server manually:
 ```bash
-npx @kevinwatt/yt-dlp-mcp
+git clone https://github.com/mcpconcierge/yt-dlp-mcp
+cd yt-dlp-mcp
+npm install
+```
+
+### Add to Claude Desktop Config file 
+```
+C:\Users\{WINDOWS_USER}\AppData\Roaming\Claude\claude_desktop_config.json
+```
+Open Editor and add following json 
+```
+{
+  "mcpServers": {
+    "yt-dlp": {
+      "command": "node",
+      "args": [
+        "C:/path/to/yt-dlp-mcp/lib/index.mjs"
+      ],
+      "env": {
+        "PATH": "C:/path/to/YT-Dlp;%PATH%"
+      }
+    }
+  }
+}
+
+```
+
+## Install on Linux or Mac 
+
+make samll change in package.json
+Ln:29
+replace :
+```
+"prepare": "tsc --skipLibCheck && npx shx chmod +x ./lib/index.mjs",
+```
+with 
+```
+"prepare": "tsc --skipLibCheck && chmod +x ./lib/index.mjs",
+``` 
+
+and run 
+```
+npm install
 ```
 
 ## Requirements
